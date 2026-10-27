@@ -1,3 +1,11 @@
+
+
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/Footer";
+import Resume from "@/components/sections/Resume";
+import Projects from "@/components/sections/Projects";
+import Services from "@/components/sections/Services";
+import About from "@/components/sections/About";
 import Navbar from "@/components/layout/Navbar";
 export default function Home() {
   return (
@@ -78,6 +86,12 @@ export default function Home() {
           </div>
         </section>
 
+        <About />
+        <Services />
+        <Projects />
+        <Resume />
+        <Contact />
+        <Footer />
         {/* Projects section placeholder */}
         <section id="projects" className="px-6 py-20 text-center">
           <p className="text-sm tracking-[0.3em] text-red-500">MY WORK</p>
