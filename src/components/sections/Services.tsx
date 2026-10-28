@@ -1,3 +1,4 @@
+
 const services = [
   {
     number: "01",
@@ -33,11 +34,11 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="bg-[#0b0b0f] px-6 py-24 text-white sm:px-10 lg:px-16"
+      className="bg-[var(--background)] px-6 py-12 text-[var(--foreground)] transition-colors duration-300 sm:px-10 md:py-16 lg:px-16"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
-        <div className="mb-14 text-center">
+        <div className="mb-10 text-center">
           <p className="text-sm font-semibold tracking-[0.3em] text-red-500">
             WHAT I EXPLORE
           </p>
@@ -46,7 +47,7 @@ export default function Services() {
             My <span className="text-red-500">Services</span>
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl leading-7 text-gray-400">
+          <p className="mx-auto mt-5 max-w-2xl leading-7 text-[var(--text-secondary)]">
             Areas I work on and continue to develop through learning and
             practical projects.
           </p>
@@ -59,19 +60,23 @@ export default function Services() {
           {services.map((service) => (
             <article
               key={service.number}
-              className="group rounded-2xl border border-white/10 bg-[#111116] p-7 transition duration-300 hover:-translate-y-2 hover:border-red-500/50"
+              className="group rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 transition duration-300 hover:-translate-y-1 hover:border-red-500/50"
             >
               <div className="flex items-center justify-between">
-                <span className="text-4xl text-red-500">{service.icon}</span>
+                <span className="text-4xl text-red-500">
+                  {service.icon}
+                </span>
 
-                <span className="text-sm text-gray-600">{service.number}</span>
+                <span className="text-sm text-[var(--text-tertiary)]">
+                  {service.number}
+                </span>
               </div>
 
-              <h3 className="mt-8 text-xl font-semibold transition group-hover:text-red-400">
+              <h3 className="mt-8 text-xl font-semibold transition group-hover:text-red-500">
                 {service.title}
               </h3>
 
-              <p className="mt-4 text-sm leading-7 text-gray-400">
+              <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
                 {service.description}
               </p>
             </article>

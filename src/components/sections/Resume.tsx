@@ -1,26 +1,64 @@
 
+import {
+  SiC,
+  SiCplusplus,
+  SiJavascript,
+  SiTypescript,
+  SiHtml5,
+  SiCss,
+  SiTailwindcss,
+  SiReact,
+  SiNextdotjs,
+  SiGit,
+  SiGithub,
+  SiPostman,
+  SiMongodb,
+  SiGnubash,
+} from "react-icons/si";
+
 const skillGroups = [
   {
     title: "Programming Languages",
-    skills: ["C", "C++", "JavaScript", "TypeScript"],
+    skills: [
+      { name: "C", icon: SiC, color: "#A8B9CC" },
+      { name: "C++", icon: SiCplusplus, color: "#00599C" },
+      { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+    ],
   },
   {
     title: "Frontend Development",
-    skills: ["HTML", "CSS", "Tailwind CSS", "React.js", "Next.js"],
+    skills: [
+      { name: "HTML", icon: SiHtml5, color: "#E34F26" },
+      { name: "CSS", icon: SiCss, color: "#1572B6" },
+      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "React.js", icon: SiReact, color: "#61DAFB" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
+    ],
   },
   {
     title: "Tools & Backend",
-    skills: ["Git", "GitHub", "REST APIs", "MongoDB", "Bash"],
+    skills: [
+      { name: "Git", icon: SiGit, color: "#F05032" },
+      { name: "GitHub", icon: SiGithub, color: "#FFFFFF" },
+      { name: "REST APIs", icon: SiPostman, color: "#FF6C37" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+      { name: "Bash", icon: SiGnubash, color: "#4EAA25" },
+    ],
   },
 ];
+
+// Combine all skills into one horizontal list.
+const allSkills = skillGroups.flatMap((group) => group.skills);
 
 export default function Resume() {
   return (
     <section
       id="resume"
-      className="bg-[#0b0b0f] px-6 py-24 text-white sm:px-10 lg:px-16"
+      className="bg-[var(--background)] px-6 py-24 text-[var(--foreground)] transition-colors duration-300 sm:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-7xl">
+        {/* Section heading */}
         <div className="mb-14 text-center">
           <p className="text-sm font-semibold tracking-[0.3em] text-red-500">
             MY BACKGROUND
@@ -33,71 +71,79 @@ export default function Resume() {
           <div className="mx-auto mt-5 h-1 w-16 rounded-full bg-red-500" />
         </div>
 
-        {/* Skills */}
+        {/* Technical Skills */}
         <h3 className="mb-7 text-2xl font-semibold">Technical Skills</h3>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {skillGroups.map((group) => (
-            <article
-              key={group.title}
-              className="rounded-2xl border border-white/10 bg-[#111116] p-6"
-            >
-              <h4 className="mb-5 font-semibold text-red-400">
-                {group.title}
-              </h4>
+        <div className="overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 transition-colors duration-300 sm:p-4">
+          <div className="flex w-max min-w-full items-center gap-2 sm:gap-3">
+            {allSkills.map((skill) => {
+              const Icon = skill.icon;
 
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-lg border border-white/10 px-3 py-2 text-sm text-gray-300"
+              return (
+                <div
+                  key={skill.name}
+                  title={skill.name}
+                  className="group flex w-[54px] shrink-0 flex-col items-center gap-1.5 rounded-xl px-1 py-2 transition-all duration-300 hover:-translate-y-1 sm:w-[66px] sm:gap-2 sm:px-2 sm:py-3"
+                >
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--subtle-bg)] transition-all duration-300 group-hover:border-transparent group-hover:shadow-md sm:h-12 sm:w-12"
+                    style={
+                      {
+                        "--skill-color": skill.color,
+                      } as React.CSSProperties
+                    }
                   >
-                    {skill}
+                    <Icon
+                      aria-hidden="true"
+                      className="h-5 w-5 text-[var(--text-soft)] transition-colors duration-300 group-hover:text-[var(--skill-color)] sm:h-6 sm:w-6"
+                    />
+                  </div>
+
+                  <span className="whitespace-nowrap text-[9px] leading-tight text-[var(--text-secondary)] transition-colors duration-300 group-hover:text-[var(--foreground)] sm:text-[10px]">
+                    {skill.name}
                   </span>
-                ))}
-              </div>
-            </article>
-          ))}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* Education */}
         <div className="mt-16">
           <h3 className="mb-7 text-2xl font-semibold">Education</h3>
 
-          <article className="rounded-2xl border border-white/10 bg-[#111116] p-7">
-            <p className="text-sm text-red-400">Currently Studying</p>
+          <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 transition-colors duration-300">
+            <p className="text-sm text-red-500">Currently Studying</p>
 
             <h4 className="mt-3 text-xl font-semibold">
-              B.Sc. in Computer Science & Engineering
+              B.Sc. in Computer Science &amp; Engineering
             </h4>
 
-            <p className="mt-2 text-gray-300">
-              Bangladesh University of Business & Technology (BUBT)
+            <p className="mt-2 text-[var(--text-soft)]">
+              Bangladesh University of Business &amp; Technology (BUBT)
             </p>
 
-            <p className="mt-3 leading-7 text-gray-400">
+            <p className="mt-3 leading-7 text-[var(--text-secondary)]">
               Currently pursuing my undergraduate degree while developing
               practical programming and web development skills.
             </p>
           </article>
         </div>
 
-        {/* Development journey */}
+        {/* Development Journey */}
         <div className="mt-12">
           <h3 className="mb-7 text-2xl font-semibold">
             Development Journey
           </h3>
 
-          <article className="rounded-2xl border border-white/10 bg-[#111116] p-7">
+          <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 transition-colors duration-300">
             <h4 className="text-xl font-semibold">
-              Web Development Learning & Projects
+              Web Development Learning &amp; Projects
             </h4>
 
-            <p className="mt-2 text-sm text-red-400">
-              Ongoing
-            </p>
+            <p className="mt-2 text-sm text-red-500">Ongoing</p>
 
-            <p className="mt-4 leading-7 text-gray-400">
+            <p className="mt-4 leading-7 text-[var(--text-secondary)]">
               Learning modern web technologies and applying that knowledge
               through personal projects. Currently strengthening frontend
               development fundamentals and learning backend development.
@@ -110,12 +156,12 @@ export default function Resume() {
           <a
             href="/resume.pdf"
             download
-            className="inline-flex rounded-lg bg-red-500 px-6 py-3 font-semibold transition hover:bg-red-600"
+            className="inline-flex rounded-lg bg-red-500 px-6 py-3 font-semibold !text-white transition-colors duration-300 hover:bg-red-600 hover:!text-white"
           >
             Download Resume
           </a>
 
-          <p className="mt-3 text-sm text-gray-500">
+          <p className="mt-3 text-sm text-[var(--text-tertiary)]">
             Add your PDF resume to the public folder to enable downloading.
           </p>
         </div>

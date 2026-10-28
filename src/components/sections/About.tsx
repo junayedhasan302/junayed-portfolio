@@ -1,12 +1,13 @@
+
 export default function About() {
   return (
     <section
       id="about"
-      className="bg-[#111116] px-6 py-24 text-white sm:px-10 lg:px-16"
+      className="bg-[var(--background)] px-6 py-12 text-[var(--foreground)] transition-colors duration-300 sm:px-10 md:py-16 lg:px-16"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
-        <div className="mb-14 text-center">
+        <div className="mb-10 text-center">
           <p className="text-sm font-semibold tracking-[0.3em] text-red-500">
             GET TO KNOW ME
           </p>
@@ -25,61 +26,78 @@ export default function About() {
               Learning, building, and growing as a developer.
             </h3>
 
-            <p className="mt-6 leading-8 text-gray-400">
-              I&apos;m Junayed Hasan, a Computer Science and Engineering student
-              at Bangladesh University of Business & Technology (BUBT). I enjoy
-              programming and exploring how modern web applications work.
+            <p className="mt-6 leading-8 text-[var(--text-secondary)]">
+              I&apos;m Junayed Hasan, a Computer Science and Engineering
+              student at Bangladesh University of Business & Technology
+              (BUBT). I enjoy programming and exploring how modern web
+              applications work.
             </p>
 
-            <p className="mt-4 leading-8 text-gray-400">
-              My learning journey includes frontend development with React and
-              Next.js. I&apos;m also learning backend development and working to
-              turn my knowledge into practical projects.
+            <p className="mt-4 leading-8 text-[var(--text-secondary)]">
+              My learning journey includes frontend development with React
+              and Next.js. I&apos;m also learning backend development and
+              working to turn my knowledge into practical projects.
             </p>
 
-            <p className="mt-4 leading-8 text-gray-400">
-              Outside coding, I enjoy photography, chess, and mathematics. I
-              believe consistent practice and curiosity help me become a better
-              developer.
+            <p className="mt-4 leading-8 text-[var(--text-secondary)]">
+              Outside coding, I enjoy photography, chess, and mathematics.
+              I believe consistent practice and curiosity help me become
+              a better developer.
             </p>
           </div>
 
           {/* Personal information */}
-          <div className="rounded-2xl border border-white/10 bg-[#0b0b0f] p-7 sm:p-9">
-            <h3 className="mb-6 text-xl font-semibold">Personal Information</h3>
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 transition-colors duration-300 sm:p-9">
+            <h3 className="mb-6 text-xl font-semibold">
+              Personal Information
+            </h3>
 
             <div className="space-y-5">
               <div className="flex flex-col gap-1 sm:flex-row sm:gap-3">
-                <span className="min-w-32 text-gray-500">Name</span>
-                <span className="text-gray-200">Junayed Hasan</span>
+                <span className="min-w-32 text-[var(--text-tertiary)]">
+                  Name
+                </span>
+                <span className="text-[var(--text-soft)]">
+                  Junayed Hasan
+                </span>
               </div>
 
               <div className="flex flex-col gap-1 sm:flex-row sm:gap-3">
-                <span className="min-w-32 text-gray-500">Education</span>
-                <span className="text-gray-200">B.Sc. in CSE (Ongoing)</span>
+                <span className="min-w-32 text-[var(--text-tertiary)]">
+                  Education
+                </span>
+                <span className="text-[var(--text-soft)]">
+                  B.Sc. in CSE (Ongoing)
+                </span>
               </div>
 
               <div className="flex flex-col gap-1 sm:flex-row sm:gap-3">
-                <span className="min-w-32 text-gray-500">University</span>
-                <span className="text-gray-200">
+                <span className="min-w-32 text-[var(--text-tertiary)]">
+                  University
+                </span>
+                <span className="text-[var(--text-soft)]">
                   Bangladesh University of Business & Technology
                 </span>
               </div>
 
               <div className="flex flex-col gap-1 sm:flex-row sm:gap-3">
-                <span className="min-w-32 text-gray-500">Interests</span>
-                <span className="text-gray-200">
+                <span className="min-w-32 text-[var(--text-tertiary)]">
+                  Interests
+                </span>
+                <span className="text-[var(--text-soft)]">
                   Web Development, Photography, Chess
                 </span>
               </div>
 
               <div className="flex flex-col gap-1 sm:flex-row sm:gap-3">
-                <span className="min-w-32 text-gray-500">GitHub</span>
+                <span className="min-w-32 text-[var(--text-tertiary)]">
+                  GitHub
+                </span>
                 <a
                   href="https://github.com/junayedhasan302"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="break-all text-red-400 transition hover:text-red-300"
+                  className="break-all text-red-500 transition hover:text-red-400"
                 >
                   junayedhasan302
                 </a>
