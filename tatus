@@ -1,0 +1,22 @@
+ package-lock.json                        |  12 [32m+[m[31m-[m
+ package.json                             |   3 [32m+[m[31m-[m
+ public/images/profile.jpg                | Bin [31m0[m -> [32m89361[m bytes
+ public/images/projects/bazar-dor.png     | Bin [31m0[m -> [32m93932[m bytes
+ public/images/projects/book-vibe.png     | Bin [31m0[m -> [32m431482[m bytes
+ public/images/projects/fitlog.png        | Bin [31m0[m -> [32m197785[m bytes
+ public/images/projects/photography.png   | Bin [31m0[m -> [32m119947[m bytes
+ public/images/projects/sobsomoy.png      | Bin [31m0[m -> [32m624846[m bytes
+ src/app/globals.css                      |  73 [32m++++++++[m[31m--[m
+ src/app/layout.tsx                       |  36 [32m++++[m[31m-[m
+ src/app/page.tsx                         |  73 [32m+++++[m[31m-----[m
+ src/app/projects/[slug]/page.tsx         | 231 [32m+++++++++++++++++++++++++++++++[m
+ src/components/layout/Footer.tsx         | 229 [32m++++++++++++++++++++++++++++[m[31m--[m
+ src/components/layout/Navbar.tsx         |  75 [32m+++++++[m[31m---[m
+ src/components/layout/ThemeProvider.tsx  |  65 [32m+++++++++[m
+ src/components/sections/About.tsx        |  70 [32m++++++[m[31m----[m
+ src/components/sections/Contact.tsx      | 166 [32m++++++++++++++++[m[31m------[m
+ src/components/sections/ProfilePhoto.tsx | 180 [32m++++++++++++++++++++++++[m
+ src/components/sections/Projects.tsx     | 147 [32m+++++++++++++[m[31m-------[m
+ src/components/sections/Resume.tsx       | 126 [32m+++++++++++[m[31m------[m
+ src/components/sections/Services.tsx     |  21 [32m+[m[31m--[m
+ 21 files changed, 1256 insertions(+), 251 deletions(-)
