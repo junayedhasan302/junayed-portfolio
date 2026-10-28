@@ -1,4 +1,3 @@
-
 import {
   SiC,
   SiCplusplus,
@@ -15,10 +14,12 @@ import {
   SiMongodb,
   SiGnubash,
 } from "react-icons/si";
+import { FaGraduationCap, FaRocket, FaDownload, FaFilePdf } from "react-icons/fa";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
-const skillGroups = [
+const skillCategories = [
   {
-    title: "Programming Languages",
+    category: "Programming Languages",
     skills: [
       { name: "C", icon: SiC, color: "#A8B9CC" },
       { name: "C++", icon: SiCplusplus, color: "#00599C" },
@@ -27,17 +28,17 @@ const skillGroups = [
     ],
   },
   {
-    title: "Frontend Development",
+    category: "Frontend Development",
     skills: [
-      { name: "HTML", icon: SiHtml5, color: "#E34F26" },
-      { name: "CSS", icon: SiCss, color: "#1572B6" },
+      { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
+      { name: "CSS3", icon: SiCss, color: "#1572B6" },
       { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
       { name: "React.js", icon: SiReact, color: "#61DAFB" },
       { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
     ],
   },
   {
-    title: "Tools & Backend",
+    category: "Tools & Backend",
     skills: [
       { name: "Git", icon: SiGit, color: "#F05032" },
       { name: "GitHub", icon: SiGithub, color: "#FFFFFF" },
@@ -48,123 +49,217 @@ const skillGroups = [
   },
 ];
 
-// Combine all skills into one horizontal list.
-const allSkills = skillGroups.flatMap((group) => group.skills);
-
 export default function Resume() {
   return (
     <section
       id="resume"
-      className="bg-[var(--background)] px-6 py-24 text-[var(--foreground)] transition-colors duration-300 sm:px-10 lg:px-16"
+      className="relative bg-[var(--background)] px-6 py-16 text-[var(--foreground)] transition-colors duration-300 sm:px-10 md:py-24 lg:px-16"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
-        <div className="mb-14 text-center">
-          <p className="text-sm font-semibold tracking-[0.3em] text-red-500">
-            MY BACKGROUND
-          </p>
+        <ScrollReveal direction="down">
+          <div className="mb-14 text-center">
+            <p className="text-xs font-bold tracking-[0.25em] text-[var(--accent)] sm:text-sm">
+              ACADEMIC &amp; TECHNICAL PROFILE
+            </p>
 
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-            My <span className="text-red-500">Resume</span>
-          </h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+              My <span className="text-[var(--accent)]">Resume</span>
+            </h2>
 
-          <div className="mx-auto mt-5 h-1 w-16 rounded-full bg-red-500" />
-        </div>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
+              An overview of my technical capabilities, academic education, and
+              ongoing software development journey.
+            </p>
 
-        {/* Technical Skills */}
-        <h3 className="mb-7 text-2xl font-semibold">Technical Skills</h3>
+            <div className="mx-auto mt-5 h-1 w-16 rounded-full bg-[var(--accent)]" />
+          </div>
+        </ScrollReveal>
 
-        <div className="overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 transition-colors duration-300 sm:p-4">
-          <div className="flex w-max min-w-full items-center gap-2 sm:gap-3">
-            {allSkills.map((skill) => {
-              const Icon = skill.icon;
+        {/* Technical Skills Section */}
+        <ScrollReveal direction="up" delay={80}>
+          <div className="mb-16">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold tracking-tight sm:text-2xl">
+                Technical Skills &amp; Stack
+              </h3>
+              <span className="text-xs font-medium text-[var(--text-tertiary)]">
+                Hover to highlight brand colors
+              </span>
+            </div>
 
-              return (
+            <div className="grid gap-6 md:grid-cols-3">
+              {skillCategories.map((group) => (
                 <div
-                  key={skill.name}
-                  title={skill.name}
-                  className="group flex w-[54px] shrink-0 flex-col items-center gap-1.5 rounded-xl px-1 py-2 transition-all duration-300 hover:-translate-y-1 sm:w-[66px] sm:gap-2 sm:px-2 sm:py-3"
+                  key={group.category}
+                  className="card-hover-glow rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 transition-all duration-300"
                 >
-                  <div
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--subtle-bg)] transition-all duration-300 group-hover:border-transparent group-hover:shadow-md sm:h-12 sm:w-12"
-                    style={
-                      {
-                        "--skill-color": skill.color,
-                      } as React.CSSProperties
-                    }
-                  >
-                    <Icon
-                      aria-hidden="true"
-                      className="h-5 w-5 text-[var(--text-soft)] transition-colors duration-300 group-hover:text-[var(--skill-color)] sm:h-6 sm:w-6"
-                    />
+                  <div className="flex items-center justify-between border-b border-[var(--border)] pb-3">
+                    <h4 className="text-sm font-bold text-[var(--foreground)]">
+                      {group.category}
+                    </h4>
+                    <span className="rounded-full bg-[var(--subtle-bg)] px-2 py-0.5 text-xs font-semibold text-[var(--text-tertiary)]">
+                      {group.skills.length} skills
+                    </span>
                   </div>
 
-                  <span className="whitespace-nowrap text-[9px] leading-tight text-[var(--text-secondary)] transition-colors duration-300 group-hover:text-[var(--foreground)] sm:text-[10px]">
-                    {skill.name}
+                  <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-2">
+                    {group.skills.map((skill) => {
+                      const Icon = skill.icon;
+
+                      return (
+                        <div
+                          key={skill.name}
+                          className="group/skill flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--subtle-bg)] p-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--surface-hover)]"
+                          style={
+                            {
+                              "--brand-color": skill.color,
+                            } as React.CSSProperties
+                          }
+                        >
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--surface)] border border-[var(--border)] transition-all duration-300 group-hover/skill:scale-110 group-hover/skill:border-[var(--brand-color)]">
+                            <Icon
+                              size={18}
+                              className="text-[var(--text-soft)] transition-colors duration-300 group-hover/skill:text-[var(--brand-color)]"
+                            />
+                          </div>
+
+                          <span className="truncate text-xs font-semibold text-[var(--text-soft)] transition-colors group-hover/skill:text-[var(--foreground)]">
+                            {skill.name}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Education & Journey Grid */}
+        <div className="grid gap-8 md:grid-cols-2">
+          {/* Education */}
+          <ScrollReveal direction="left" delay={120}>
+            <article className="card-hover-glow flex h-full flex-col justify-between rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 transition-all duration-300 sm:p-8">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--subtle-bg)] text-[var(--accent)] border border-[var(--border)]">
+                    <FaGraduationCap size={22} />
+                  </div>
+
+                  <span className="rounded-full bg-red-500/10 px-3 py-1 text-xs font-bold text-[var(--accent)] border border-red-500/20">
+                    Currently Studying
                   </span>
                 </div>
-              );
-            })}
+
+                <h3 className="mt-6 text-xl font-bold tracking-tight sm:text-2xl">
+                  B.Sc. in Computer Science &amp; Engineering
+                </h3>
+
+                <p className="mt-2 text-sm font-semibold text-[var(--text-soft)]">
+                  Bangladesh University of Business &amp; Technology (BUBT)
+                </p>
+
+                <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                  Pursuing foundational and advanced concepts in computer
+                  science, data structures, algorithms, object-oriented
+                  programming, database systems, and modern web software
+                  engineering.
+                </p>
+              </div>
+
+              <div className="mt-6 border-t border-[var(--border)] pt-4 flex items-center justify-between">
+                <span className="text-xs font-medium text-[var(--text-tertiary)]">
+                  Status: Undergraduate Student
+                </span>
+                <span className="text-xs font-semibold text-[var(--accent)]">
+                  Dhaka, Bangladesh
+                </span>
+              </div>
+            </article>
+          </ScrollReveal>
+
+          {/* Development Journey */}
+          <ScrollReveal direction="right" delay={140}>
+            <article className="card-hover-glow flex h-full flex-col justify-between rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 transition-all duration-300 sm:p-8">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--subtle-bg)] text-[var(--accent)] border border-[var(--border)]">
+                    <FaRocket size={20} />
+                  </div>
+
+                  <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-500 border border-emerald-500/20">
+                    Active Growth
+                  </span>
+                </div>
+
+                <h3 className="mt-6 text-xl font-bold tracking-tight sm:text-2xl">
+                  Web Development Journey
+                </h3>
+
+                <p className="mt-2 text-sm font-semibold text-[var(--text-soft)]">
+                  Independent Projects &amp; Continuous Learning
+                </p>
+
+                <p className="mt-4 text-sm leading-relaxed text-[var(--text-secondary)]">
+                  Deepening core expertise across modern web stacks, including
+                  TypeScript, React 19, Next.js App Router, Tailwind CSS, and
+                  backend integrations. Building real-world web projects with a
+                  focus on performance, responsive design, and clean code
+                  architecture.
+                </p>
+              </div>
+
+              <div className="mt-6 border-t border-[var(--border)] pt-4 flex items-center justify-between">
+                <span className="text-xs font-medium text-[var(--text-tertiary)]">
+                  Focus: Modern Full-Stack Development
+                </span>
+                <span className="text-xs font-semibold text-emerald-500">
+                  Continuous Learner
+                </span>
+              </div>
+            </article>
+          </ScrollReveal>
+        </div>
+
+        {/* Resume Download CTA */}
+        <ScrollReveal direction="zoom" delay={160}>
+          <div className="card-hover-glow mt-14 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center sm:p-10 relative overflow-hidden">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-12 -right-12 h-44 w-44 rounded-full bg-[var(--accent)] opacity-[0.06] blur-2xl"
+            />
+
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/10 text-[var(--accent)] mb-4">
+              <FaFilePdf size={22} />
+            </div>
+
+            <h3 className="text-xl font-bold tracking-tight sm:text-2xl">
+              Interested in my complete credentials?
+            </h3>
+
+            <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-[var(--text-secondary)]">
+              Download my resume to see detailed information regarding my academic
+              record, technical skills, coursework, and projects.
+            </p>
+
+            <div className="mt-6">
+              <a
+                href="/resume.pdf"
+                download="Junayed_Hasan_Resume.pdf"
+                className="inline-flex items-center gap-2.5 rounded-xl bg-[var(--accent)] px-8 py-3.5 text-sm font-semibold !text-white shadow-lg shadow-red-500/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-600 hover:shadow-xl hover:shadow-red-500/25"
+              >
+                <FaDownload size={14} />
+                <span>Download Resume</span>
+              </a>
+            </div>
+
+            <p className="mt-3 text-xs text-[var(--text-tertiary)]">
+              PDF Format • Accessible upon placing resume.pdf in public folder
+            </p>
           </div>
-        </div>
-
-        {/* Education */}
-        <div className="mt-16">
-          <h3 className="mb-7 text-2xl font-semibold">Education</h3>
-
-          <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 transition-colors duration-300">
-            <p className="text-sm text-red-500">Currently Studying</p>
-
-            <h4 className="mt-3 text-xl font-semibold">
-              B.Sc. in Computer Science &amp; Engineering
-            </h4>
-
-            <p className="mt-2 text-[var(--text-soft)]">
-              Bangladesh University of Business &amp; Technology (BUBT)
-            </p>
-
-            <p className="mt-3 leading-7 text-[var(--text-secondary)]">
-              Currently pursuing my undergraduate degree while developing
-              practical programming and web development skills.
-            </p>
-          </article>
-        </div>
-
-        {/* Development Journey */}
-        <div className="mt-12">
-          <h3 className="mb-7 text-2xl font-semibold">
-            Development Journey
-          </h3>
-
-          <article className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-7 transition-colors duration-300">
-            <h4 className="text-xl font-semibold">
-              Web Development Learning &amp; Projects
-            </h4>
-
-            <p className="mt-2 text-sm text-red-500">Ongoing</p>
-
-            <p className="mt-4 leading-7 text-[var(--text-secondary)]">
-              Learning modern web technologies and applying that knowledge
-              through personal projects. Currently strengthening frontend
-              development fundamentals and learning backend development.
-            </p>
-          </article>
-        </div>
-
-        {/* Resume download */}
-        <div className="mt-12 text-center">
-          <a
-            href="/resume.pdf"
-            download
-            className="inline-flex rounded-lg bg-red-500 px-6 py-3 font-semibold !text-white transition-colors duration-300 hover:bg-red-600 hover:!text-white"
-          >
-            Download Resume
-          </a>
-
-          <p className="mt-3 text-sm text-[var(--text-tertiary)]">
-            Add your PDF resume to the public folder to enable downloading.
-          </p>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

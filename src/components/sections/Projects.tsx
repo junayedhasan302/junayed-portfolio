@@ -1,189 +1,157 @@
-
 import Link from "next/link";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-
-const projects = [
-  {
-    number: "01",
-    title: "Bazar Dor Bangla",
-    description:
-      "A Bangla-focused project for exploring product prices and market information.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    image: "/images/projects/bazar-dor.png",
-    liveUrl: "https://damkoto-sable.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/Assignment-07",
-    slug: "bazar-dor-bangla",
-  },
-  {
-    number: "02",
-    title: "FitLog",
-    description:
-      "A fitness-related web project designed to help users track their fitness journey.",
-    technologies: ["React", "Web Development"],
-    image: "/images/projects/fitlog.png",
-    liveUrl: "https://jhfitlog.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/Assignment-06",
-    slug: "fitlog",
-  },
-  {
-    number: "03",
-    title: "SobSomoy",
-    description:
-      "A news-focused web project for browsing news and current updates.",
-    technologies: ["Next.js", "Web Development"],
-    image: "/images/projects/sobsomoy.png",
-    liveUrl: "https://sobsomoy-updated.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/sobsomoy-updated",
-    slug: "sobsomoy",
-  },
-  {
-    number: "04",
-    title: "JH Book Vibe",
-    description:
-      "A book-focused web project for exploring book-related content.",
-    technologies: ["Next.js", "Web Development"],
-    image: "/images/projects/book-vibe.png",
-    liveUrl: "https://book-vibe-weld-two.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/book-vibe",
-    slug: "jh-book-vibe",
-  },
-  {
-    number: "05",
-    title: "Photography Portfolio",
-    description:
-      "A photography portfolio showcasing visual stories and creative work.",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    image: "/images/projects/photography.png",
-    liveUrl: "https://jhp-sand.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/photography-portfolio",
-    slug: "photography-portfolio",
-  },
-];
+import Image from "next/image";
+import { FaGithub, FaExternalLinkAlt, FaArrowRight, FaCodeBranch } from "react-icons/fa";
+import { projects } from "@/data/projects";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function Projects() {
   return (
     <section
       id="projects"
-      className="bg-[var(--background)] px-6 py-12 text-[var(--foreground)] transition-colors duration-300 sm:px-10 md:py-16 lg:px-16"
+      className="relative bg-[var(--background)] px-6 py-16 text-[var(--foreground)] transition-colors duration-300 sm:px-10 md:py-24 lg:px-16"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section heading */}
-        <div className="mb-10 text-center">
-          <p className="text-sm font-semibold tracking-[0.3em] text-red-500">
-            MY RECENT WORK
-          </p>
+        <ScrollReveal direction="down">
+          <div className="mb-14 text-center">
+            <p className="text-xs font-bold tracking-[0.25em] text-[var(--accent)] sm:text-sm">
+              PORTFOLIO SHOWCASE
+            </p>
 
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-            Featured <span className="text-red-500">Projects</span>
-          </h2>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl">
+              Featured <span className="text-[var(--accent)]">Projects</span>
+            </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl leading-7 text-[var(--text-secondary)]">
-            A selection of projects I have worked on while learning and
-            building my web development skills.
-          </p>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[var(--text-secondary)]">
+              A curated selection of web applications and projects built to
+              solve practical problems and demonstrate continuous learning.
+            </p>
 
-          <div className="mx-auto mt-5 h-1 w-16 rounded-full bg-red-500" />
-        </div>
+            <div className="mx-auto mt-5 h-1 w-16 rounded-full bg-[var(--accent)]" />
+          </div>
+        </ScrollReveal>
 
-        {/* Project cards */}
-        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <article
-              key={project.number}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] transition duration-300 hover:-translate-y-1 hover:border-red-500/50 hover:shadow-lg hover:shadow-red-500/5"
+        {/* Project cards grid */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => (
+            <ScrollReveal
+              key={project.slug}
+              direction="up"
+              delay={index * 90}
             >
-              {/* Clickable card overlay */}
-              <Link
-                href={`/projects/${project.slug}`}
-                aria-label={`View details for ${project.title}`}
-                className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
-              />
+              <article className="card-hover-glow group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] transition-all duration-300">
+                {/* Project preview image with link */}
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="relative block aspect-[16/10] w-full overflow-hidden bg-[var(--subtle-bg)] focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
+                  aria-label={`View ${project.title} details`}
+                >
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  
+                  {/* Floating badge over image */}
+                  <div className="absolute top-3 left-3 rounded-lg bg-[var(--nav-background)]/80 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold tracking-wider text-[var(--accent)] border border-[var(--border)]">
+                    #{project.number}
+                  </div>
+                </Link>
 
-              {/* Project preview image */}
-              <div className="flex h-48 items-center justify-center overflow-hidden bg-[var(--subtle-bg)]">
-                <img
-                  src={project.image}
-                  alt={`${project.title} project preview`}
-                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                />
-              </div>
-
-              <div className="flex flex-1 flex-col p-6">
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-red-500/80">
-                    {project.number}
-                  </span>
-
-                  <span className="text-xs tracking-wider text-[var(--text-tertiary)]">
-                    PROJECT
-                  </span>
-                </div>
-
-                <h3 className="mt-5 text-xl font-semibold transition-colors group-hover:text-red-500">
-                  {project.title}
-                </h3>
-
-                <p className="mt-3 flex-1 text-sm leading-7 text-[var(--text-secondary)]">
-                  {project.description}
-                </p>
-
-                {/* Technologies */}
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.technologies.map((technology) => (
-                    <span
-                      key={technology}
-                      className="rounded-md bg-[var(--subtle-bg)] px-2.5 py-1 text-xs text-[var(--text-soft)]"
-                    >
-                      {technology}
+                <div className="flex flex-1 flex-col p-6 sm:p-7">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-[var(--text-tertiary)] flex items-center gap-1.5">
+                      <FaCodeBranch size={11} className="text-[var(--accent)]" />
+                      Web Application
                     </span>
-                  ))}
+
+                    <span className="rounded-full bg-[var(--subtle-bg)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--text-tertiary)]">
+                      Case Study Available
+                    </span>
+                  </div>
+
+                  <h3 className="mt-3 text-xl font-bold tracking-tight text-[var(--foreground)] transition-colors group-hover:text-[var(--accent)]">
+                    <Link href={`/projects/${project.slug}`}>
+                      {project.title}
+                    </Link>
+                  </h3>
+
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+                    {project.description}
+                  </p>
+
+                  {/* Technology badges */}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-lg border border-[var(--border)] bg-[var(--subtle-bg)] px-2.5 py-1 text-xs font-medium text-[var(--text-soft)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Action links */}
+                  <div className="mt-6 flex items-center justify-between border-t border-[var(--border)] pt-4">
+                    <div className="flex items-center gap-2">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open live site for ${project.title}`}
+                        title="Live Demo"
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--subtle-bg)] text-[var(--text-soft)] transition-all hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:!text-white shadow-sm"
+                      >
+                        <FaExternalLinkAlt size={13} />
+                      </a>
+
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View source code for ${project.title} on GitHub`}
+                        title="GitHub Repository"
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--subtle-bg)] text-[var(--text-soft)] transition-all hover:-translate-y-0.5 hover:border-[var(--accent)] hover:bg-[var(--accent)] hover:!text-white shadow-sm"
+                      >
+                        <FaGithub size={16} />
+                      </a>
+                    </div>
+
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="group/link inline-flex items-center gap-1.5 text-xs font-bold text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
+                    >
+                      <span>Explore Details</span>
+                      <FaArrowRight
+                        size={11}
+                        className="transition-transform duration-200 group-hover/link:translate-x-1"
+                      />
+                    </Link>
+                  </div>
                 </div>
-
-                {/* External links */}
-                <div className="relative z-20 mt-7 flex items-center gap-3">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Open live ${project.title} project`}
-                    title="Live Project"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--subtle-bg)] text-[var(--text-soft)] transition-colors hover:border-red-500 hover:bg-red-500/10 hover:text-red-500"
-                  >
-                    <FaExternalLinkAlt size={15} />
-                  </a>
-
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View ${project.title} source code on GitHub`}
-                    title="GitHub Repository"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--subtle-bg)] text-[var(--text-soft)] transition-colors hover:border-red-500 hover:bg-red-500/10 hover:text-red-500"
-                  >
-                    <FaGithub size={19} />
-                  </a>
-
-                  <span className="ml-auto text-sm font-medium text-[var(--text-secondary)] transition-colors group-hover:text-red-500">
-                    View Details <span aria-hidden="true">↗</span>
-                  </span>
-                </div>
-              </div>
-            </article>
+              </article>
+            </ScrollReveal>
           ))}
         </div>
 
-        {/* GitHub profile link */}
-        <div className="mt-12 text-center">
-          <a
-            href="https://github.com/junayedhasan302"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-[var(--border-strong)] px-6 py-3 font-semibold text-[var(--foreground)] transition-colors hover:border-red-500 hover:text-red-500"
-          >
-            <FaGithub size={18} />
-            Explore My GitHub
-          </a>
-        </div>
+        {/* GitHub profile CTA */}
+        <ScrollReveal direction="up" delay={150}>
+          <div className="mt-14 text-center">
+            <a
+              href="https://github.com/junayedhasan302"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] px-7 py-3.5 text-sm font-semibold text-[var(--foreground)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-lg hover:shadow-red-500/10"
+            >
+              <FaGithub size={18} />
+              <span>Explore More Repositories on GitHub</span>
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

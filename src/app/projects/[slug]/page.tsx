@@ -1,109 +1,36 @@
-
 import { Suspense } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-
-// Temporary project data
-const projects = [
-  {
-    slug: "bazar-dor-bangla",
-    title: "Bazar Dor Bangla",
-    description:
-      "A Bangla-focused web application for exploring product prices and market information.",
-    image: "/images/projects/bazar-dor.png",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://damkoto-sable.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/Assignment-07",
-    challenges: [
-      "Creating a responsive user interface.",
-      "Organizing product information clearly.",
-      "Maintaining a consistent design across devices.",
-    ],
-    improvements: [
-      "Add more product and market data.",
-      "Improve search and filtering.",
-      "Enhance accessibility and performance.",
-    ],
-  },
-  {
-    slug: "fitlog",
-    title: "FitLog",
-    description:
-      "A fitness-related web application designed to help users track their fitness journey.",
-    image: "/images/projects/fitlog.png",
-    technologies: ["React", "JavaScript", "CSS"],
-    liveUrl: "https://jhfitlog.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/Assignment-06",
-    challenges: [
-      "Designing a clear and usable interface.",
-      "Organizing fitness-related information.",
-    ],
-    improvements: [
-      "Add user accounts and saved progress.",
-      "Improve fitness tracking features.",
-    ],
-  },
-  {
-    slug: "sobsomoy",
-    title: "SobSomoy Updated",
-    description:
-      "A news-focused web application for browsing news and current updates.",
-    image: "/images/projects/sobsomoy.png",
-    technologies: ["Next.js", "JavaScript", "CSS"],
-    liveUrl: "https://sobsomoy-updated.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/sobsomoy-updated",
-    challenges: [
-      "Presenting news content clearly.",
-      "Building a responsive news layout.",
-    ],
-    improvements: [
-      "Improve news search and categories.",
-      "Enhance loading and error states.",
-    ],
-  },
-  {
-    slug: "jh-book-vibe",
-    title: "Book Vibe",
-    description:
-      "A book-focused web application for exploring book-related content.",
-    image: "/images/projects/book-vibe.png",
-    technologies: ["Next.js", "JavaScript", "Tailwind CSS"],
-    liveUrl: "https://jhbook-vibe-vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/book-vibe",
-    challenges: [
-      "Organizing book information.",
-      "Creating an accessible browsing experience.",
-    ],
-    improvements: [
-      "Add book search and filtering.",
-      "Improve book details and recommendations.",
-    ],
-  },
-  {
-    slug: "photography-portfolio",
-    title: "Photography Portfolio",
-    description:
-      "A photography portfolio showcasing visual stories and creative work.",
-    image: "/images/projects/photography.png",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://jhp-sand.vercel.app/",
-    githubUrl: "https://github.com/junayedhasan302/photography-portfolio",
-    challenges: [
-      "Displaying photographs effectively.",
-      "Maintaining a responsive gallery layout.",
-    ],
-    improvements: [
-      "Add more photography albums.",
-      "Improve image viewing and gallery navigation.",
-    ],
-  },
-];
+import type { Metadata } from "next";
+import { FaExternalLinkAlt, FaGithub, FaArrowLeft, FaCheckCircle, FaLightbulb } from "react-icons/fa";
+import { projects } from "@/data/projects";
 
 // Generate a page for each project slug
 export function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((item) => item.slug === slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found | Junayed Hasan",
+    };
+  }
+
+  return {
+    title: `${project.title} — Project Case Study | Junayed Hasan`,
+    description: project.description,
+  };
 }
 
 // Page entry point
@@ -117,8 +44,8 @@ export default async function ProjectDetailsPage({
   return (
     <Suspense
       fallback={
-        <main className="min-h-screen bg-[var(--background)] px-6 py-16 text-[var(--foreground)]">
-          Loading project details...
+        <main className="flex min-h-screen items-center justify-center bg-[var(--background)] px-6 py-16 text-[var(--foreground)]">
+          <p className="text-sm text-[var(--text-secondary)]">Loading project details...</p>
         </main>
       }
     >
@@ -137,45 +64,64 @@ function ProjectDetailsContent({ slug }: { slug: string }) {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--background)] px-6 py-16 text-[var(--foreground)] transition-colors duration-300 sm:px-10 lg:px-16">
-      <div className="mx-auto max-w-5xl">
+    <main className="min-h-screen bg-[var(--background)] px-6 py-12 text-[var(--foreground)] transition-colors duration-300 sm:px-10 md:py-20 lg:px-16">
+      <div className="mx-auto max-w-4xl">
+        {/* Navigation back */}
         <Link
           href="/#projects"
-          className="text-sm text-red-500 transition hover:text-red-600"
+          className="group inline-flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--text-secondary)] transition-all hover:border-[var(--accent)] hover:text-[var(--accent)]"
         >
-          ← Back to Projects
+          <FaArrowLeft
+            size={12}
+            className="transition-transform duration-200 group-hover:-translate-x-1"
+          />
+          <span>Back to Projects</span>
         </Link>
 
-        <p className="mt-10 text-sm font-semibold tracking-[0.25em] text-red-500">
-          PROJECT DETAILS
-        </p>
+        {/* Header information */}
+        <div className="mt-8">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold tracking-[0.25em] text-[var(--accent)]">
+              PROJECT {project.number}
+            </span>
+            <span className="text-xs text-[var(--text-tertiary)]">•</span>
+            <span className="text-xs font-medium text-[var(--text-secondary)]">
+              Case Study
+            </span>
+          </div>
 
-        <h1 className="mt-4 text-3xl font-bold sm:text-5xl">
-          {project.title}
-        </h1>
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
+            {project.title}
+          </h1>
 
-        <p className="mt-5 max-w-3xl leading-8 text-[var(--text-secondary)]">
-          {project.description}
-        </p>
+          <p className="mt-4 text-base leading-relaxed text-[var(--text-secondary)] sm:text-lg">
+            {project.description}
+          </p>
+        </div>
 
         {/* Project screenshot */}
-        <div className="mt-10 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--subtle-bg)]">
-          <img
+        <div className="relative mt-10 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-xl">
+          <Image
             src={project.image}
             alt={`${project.title} screenshot`}
-            className="h-auto max-h-[520px] w-full object-cover object-top"
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 896px"
+            className="object-cover object-top"
           />
         </div>
 
         {/* Technologies used */}
         <section className="mt-12">
-          <h2 className="text-2xl font-semibold">Technologies Used</h2>
+          <h2 className="text-xl font-bold tracking-tight sm:text-2xl">
+            Technologies Used
+          </h2>
 
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-4 flex flex-wrap gap-2.5">
             {project.technologies.map((technology) => (
               <span
                 key={technology}
-                className="rounded-lg border border-[var(--border)] bg-[var(--subtle-bg)] px-4 py-2 text-sm text-[var(--text-soft)]"
+                className="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--text-soft)] shadow-sm"
               >
                 {technology}
               </span>
@@ -183,46 +129,67 @@ function ProjectDetailsContent({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {/* Development challenges */}
-        <section className="mt-12">
-          <h2 className="text-2xl font-semibold">Challenges</h2>
+        {/* Two column grid for Challenges and Improvements */}
+        <div className="mt-12 grid gap-8 md:grid-cols-2">
+          {/* Development challenges */}
+          <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-7">
+            <div className="flex items-center gap-2.5 text-amber-500">
+              <FaLightbulb size={18} />
+              <h2 className="text-lg font-bold text-[var(--foreground)]">
+                Key Challenges
+              </h2>
+            </div>
 
-          <ul className="mt-4 list-inside list-disc space-y-3 text-[var(--text-secondary)]">
-            {project.challenges.map((challenge) => (
-              <li key={challenge}>{challenge}</li>
-            ))}
-          </ul>
-        </section>
+            <ul className="mt-5 space-y-3.5 text-sm leading-relaxed text-[var(--text-secondary)]">
+              {project.challenges.map((challenge) => (
+                <li key={challenge} className="flex items-start gap-2.5">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                  <span>{challenge}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
 
-        {/* Future improvements */}
-        <section className="mt-12">
-          <h2 className="text-2xl font-semibold">Future Improvements</h2>
+          {/* Future improvements */}
+          <section className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 sm:p-7">
+            <div className="flex items-center gap-2.5 text-[var(--accent)]">
+              <FaCheckCircle size={18} />
+              <h2 className="text-lg font-bold text-[var(--foreground)]">
+                Future Improvements
+              </h2>
+            </div>
 
-          <ul className="mt-4 list-inside list-disc space-y-3 text-[var(--text-secondary)]">
-            {project.improvements.map((improvement) => (
-              <li key={improvement}>{improvement}</li>
-            ))}
-          </ul>
-        </section>
+            <ul className="mt-5 space-y-3.5 text-sm leading-relaxed text-[var(--text-secondary)]">
+              {project.improvements.map((improvement) => (
+                <li key={improvement} className="flex items-start gap-2.5">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                  <span>{improvement}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
 
-        {/* Project links */}
-        <div className="mt-12 flex flex-wrap gap-4">
+        {/* Project links CTA */}
+        <div className="mt-12 flex flex-wrap items-center gap-4 border-t border-[var(--border)] pt-8">
           <a
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-red-500 px-6 py-3 font-semibold !text-white transition-colors duration-300 hover:bg-red-600 hover:!text-white"
+            className="inline-flex items-center gap-2.5 rounded-xl bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold !text-white shadow-lg shadow-red-500/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-600 hover:shadow-xl hover:shadow-red-500/20"
           >
-            Visit Live Project ↗
+            <span>Visit Live Project</span>
+            <FaExternalLinkAlt size={13} />
           </a>
 
           <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg border border-[var(--border-strong)] px-6 py-3 font-semibold transition-colors duration-300 hover:border-red-500 hover:text-red-500"
+            className="inline-flex items-center gap-2.5 rounded-xl border border-[var(--border-strong)] bg-[var(--surface)] px-6 py-3.5 text-sm font-semibold text-[var(--foreground)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
-            GitHub Repository ↗
+            <FaGithub size={16} />
+            <span>GitHub Repository</span>
           </a>
         </div>
       </div>

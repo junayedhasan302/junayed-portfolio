@@ -1,24 +1,29 @@
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "Junayed Hasan | Developer Portfolio",
   description:
-    "Explore the portfolio, projects, skills, and development journey of Junayed Hasan, a CSE student and web developer.",
+    "Explore the portfolio, projects, skills, and development journey of Junayed Hasan, a CSE student at BUBT and web developer.",
+  keywords: [
+    "Junayed Hasan",
+    "Web Developer",
+    "Frontend Developer",
+    "Next.js Portfolio",
+    "React Developer",
+    "BUBT",
+  ],
+  authors: [{ name: "Junayed Hasan" }],
+  openGraph: {
+    title: "Junayed Hasan | Developer Portfolio",
+    description:
+      "Explore the portfolio, projects, skills, and development journey of Junayed Hasan, a CSE student and web developer.",
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 const themeScript = `
@@ -41,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className="h-full antialiased"
       data-theme="dark"
       suppressHydrationWarning
     >
@@ -49,7 +54,7 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
 
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col font-sans">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
